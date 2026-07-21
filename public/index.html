@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0">
+<title>Bearents</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#F6A93B">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Bearents">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="app">
+  <header class="topbar">
+    <div class="brand">🐻 Bearents</div>
+    <button id="settingsBtn" class="icon-btn" aria-label="Settings" type="button">⚙️</button>
+  </header>
+
+  <section id="screen-pairing" class="screen active">
+    <div class="pairing-hero">
+      <div class="pairing-emoji">🐻💛</div>
+      <h1>Bearents</h1>
+      <p>A little daily thing just for the two of you.</p>
+    </div>
+
+    <div id="pairingMainCard" class="pairing-card">
+      <div class="pairing-tabs">
+        <button class="pairing-tab active" data-pairing="create" type="button">Start one</button>
+        <button class="pairing-tab" data-pairing="join" type="button">Join with a code</button>
+      </div>
+
+      <div id="pairing-create" class="pairing-form active">
+        <label for="createName">Your name</label>
+        <input id="createName" type="text" placeholder="What should we call you?" maxlength="40">
+        <button id="createBtn" class="btn btn-primary btn-block" type="button">Create our code</button>
+      </div>
+
+      <div id="pairing-join" class="pairing-form">
+        <label for="joinName">Your name</label>
+        <input id="joinName" type="text" placeholder="What should we call you?" maxlength="40">
+        <label for="joinCode">Couple code</label>
+        <input id="joinCode" class="code-input" type="text" placeholder="e.g. 7K3PXQ" maxlength="6">
+        <button id="joinBtn" class="btn btn-primary btn-block" type="button">Join</button>
+      </div>
+
+      <p id="pairingError" class="pairing-error hidden"></p>
+    </div>
+
+    <div id="waitingCard" class="pairing-card hidden">
+      <p>Share this code with your partner:</p>
+      <div class="code-display" id="waitingCode"></div>
+      <p class="waiting-hint">Waiting for them to join…</p>
+    </div>
+  </section>
+
+  <section id="screen-games" class="screen">
+    <div class="streak-bar" id="streakBar"></div>
+
+    <div id="gamePanel" class="game-panel-wrap">
+      <div id="panel-qa" class="game-panel active">
+        <div class="qa-badge" id="qaType">Loading</div>
+        <p class="qa-question" id="qaQuestionText">Loading today's question…</p>
+
+        <div class="qa-compose">
+          <textarea id="qaInput" class="qa-input" placeholder="Type your answer…" maxlength="1000"></textarea>
+          <button id="qaSubmitBtn" class="btn btn-primary btn-block" type="button">Lock in my answer</button>
+        </div>
+
+        <div id="qaAnswers" class="qa-answers hidden">
+          <div class="answer-card mine">
+            <div class="answer-label">You</div>
+            <div class="answer-text" id="qaMyText"></div>
+          </div>
+          <div class="answer-card partner" id="qaPartnerCard">
+            <div class="answer-label">Partner</div>
+            <div class="answer-text" id="qaPartnerText"></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="panel-guess" class="game-panel">
+        <div class="guess-score" id="guessScoreBar"></div>
+        <div class="guess-role-banner" id="guessRoleBanner"></div>
+        <p class="guess-prompt" id="guessPromptText">Loading today's round…</p>
+        <div class="guess-options" id="guessOptions"></div>
+        <div class="guess-reveal hidden" id="guessReveal"></div>
+      </div>
+
+      <div id="panel-dare" class="game-panel">
+        <div class="dare-card">
+          <div class="dare-emoji">🔥</div>
+          <p class="dare-text" id="dareText">Loading today's dare…</p>
+          <button id="dareDoneBtn" class="btn btn-primary btn-block" type="button">Mark as done</button>
+          <div class="dare-status" id="dareStatus"></div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="tabbar">
+      <button class="tab active" data-tab="qa" type="button"><span class="tab-icon">💬</span><span>Q&amp;A</span></button>
+      <button class="tab" data-tab="guess" type="button"><span class="tab-icon">🎯</span><span>Guess</span></button>
+      <button class="tab" data-tab="dare" type="button"><span class="tab-icon">🔥</span><span>Dare</span></button>
+    </nav>
+  </section>
+
+  <section id="screen-settings" class="screen">
+    <div class="settings-card">
+      <h2>Settings</h2>
+      <p class="settings-hint">Save these somewhere safe — you'll need them to relink this app if you ever reinstall it.</p>
+      <div class="settings-row"><span>Couple code</span><code id="settingsCode">—</code></div>
+      <div class="settings-row"><span>Your member ID</span><code id="settingsMemberId">—</code></div>
+
+      <button id="enablePushBtn" class="btn btn-secondary btn-block" type="button">Enable daily reminder</button>
+
+      <div class="settings-divider"></div>
+
+      <h3>Reinstalled the app?</h3>
+      <p class="settings-hint">Paste your saved couple code and member ID back in to relink your slot.</p>
+      <label for="relinkCode">Couple code</label>
+      <input id="relinkCode" class="code-input" type="text" maxlength="6">
+      <label for="relinkMemberId">Member ID</label>
+      <input id="relinkMemberId" type="text">
+      <button id="relinkBtn" class="btn btn-secondary btn-block" type="button">Relink</button>
+
+      <button id="backToGamesBtn" class="btn btn-ghost btn-block" type="button">Back to games</button>
+    </div>
+  </section>
+</div>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
