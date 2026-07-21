@@ -1,5 +1,5 @@
 const { requireMember } = require('../lib/couples');
-const { getRedis } = require('../lib/redis');
+const { getRedis, parseJsonField } = require('../lib/redis');
 const { getAppDate } = require('../lib/day');
 const { todaysQaQuestion, todaysGuessRound, todaysDare, todaysDoodlePrompt } = require('../lib/scheduler');
 const { todaysBearBlitzRound } = require('../lib/bearBlitz');
@@ -113,9 +113,9 @@ module.exports = async (req, res) => {
     mySubmitted: myBBSubmitted,
     partnerSubmitted: partnerBBSubmitted,
     bothSubmitted: bbBothSubmitted,
-    myAnswers: myBBSubmitted ? JSON.parse(bbAnswers[`${meKey}Answers`] || '[]') : null,
+    myAnswers: myBBSubmitted ? parseJsonField(bbAnswers[`${meKey}Answers`], []) : null,
     myTotal: myBBSubmitted ? parseInt(bbAnswers[`${meKey}Total`] || '0', 10) : null,
-    partnerAnswers: bbBothSubmitted ? JSON.parse(bbAnswers[`${partnerKey}Answers`] || '[]') : null,
+    partnerAnswers: bbBothSubmitted ? parseJsonField(bbAnswers[`${partnerKey}Answers`], []) : null,
     partnerTotal: bbBothSubmitted ? parseInt(bbAnswers[`${partnerKey}Total`] || '0', 10) : null,
     topAnswers: bbBothSubmitted ? bbRound.categories.map((c) => c.answers[0].text) : null,
   };
@@ -135,7 +135,7 @@ module.exports = async (req, res) => {
     id: doodleRound.id,
     myRole: myDoodleRole,
     prompt: myDoodleRole === 'artist' ? doodleRound.text : hasGuess ? doodleRound.text : null,
-    strokes: hasDrawing ? JSON.parse(doodleAnswers.strokes) : null,
+    strokes: hasDrawing ? parseJsonField(doodleAnswers.strokes, null) : null,
     hasDrawing,
     hasGuess,
     guessText: hasGuess ? doodleAnswers.guessText : null,
