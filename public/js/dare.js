@@ -1,5 +1,6 @@
 import { apiPost } from './api.js';
 import { getIdentity } from './state.js';
+import { toast } from './toast.js';
 
 let onSubmitted = () => {};
 
@@ -15,7 +16,8 @@ function initDare(opts) {
     try {
       await apiPost('/api/dare/complete', { code: identity.code, memberId: identity.memberId });
       celebrate();
-      onSubmitted();
+      toast('✓ Dare marked done 🔥');
+      onSubmitted('dare');
     } catch (err) {
       alert(err.message);
       el('dareDoneBtn').disabled = false;

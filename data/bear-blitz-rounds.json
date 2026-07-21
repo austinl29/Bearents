@@ -1,0 +1,482 @@
+[
+  {
+    "id": "blitz-001",
+    "categories": [
+      { "prompt": "Name something you'd bring camping", "answers": [
+        { "text": "tent", "points": 40, "aliases": ["tents"] },
+        { "text": "sleeping bag", "points": 30, "aliases": ["sleeping bags", "sleepingbag"] },
+        { "text": "flashlight", "points": 20, "aliases": ["torch", "flash light"] },
+        { "text": "food", "points": 15, "aliases": ["snacks", "snack"] },
+        { "text": "bug spray", "points": 10, "aliases": ["insect repellent", "bugspray"] }
+      ]},
+      { "prompt": "Name a bug you might see camping", "answers": [
+        { "text": "mosquito", "points": 40, "aliases": ["mosquitoes", "mosquitos"] },
+        { "text": "ant", "points": 30, "aliases": ["ants"] },
+        { "text": "spider", "points": 20, "aliases": ["spiders"] },
+        { "text": "bee", "points": 15, "aliases": ["bees", "wasp"] },
+        { "text": "tick", "points": 10, "aliases": ["ticks"] }
+      ]},
+      { "prompt": "Name something you do around a campfire", "answers": [
+        { "text": "roast marshmallows", "points": 40, "aliases": ["smores", "s'mores", "roasting marshmallows"] },
+        { "text": "tell stories", "points": 30, "aliases": ["ghost stories", "storytelling"] },
+        { "text": "sing songs", "points": 20, "aliases": ["sing", "singing"] },
+        { "text": "stare at it", "points": 15, "aliases": ["watch the fire", "staring at the fire"] },
+        { "text": "cook food", "points": 10, "aliases": ["cooking", "grill"] }
+      ]},
+      { "prompt": "Name something that could ruin a camping trip", "answers": [
+        { "text": "rain", "points": 40, "aliases": ["storm", "bad weather"] },
+        { "text": "bugs", "points": 30, "aliases": ["mosquitoes", "insects"] },
+        { "text": "no cell service", "points": 20, "aliases": ["no signal", "no phone service"] },
+        { "text": "wild animals", "points": 15, "aliases": ["bears", "animals"] },
+        { "text": "getting lost", "points": 10, "aliases": ["lost", "losing the trail"] }
+      ]},
+      { "prompt": "Name an animal you might see in the woods", "answers": [
+        { "text": "deer", "points": 40, "aliases": ["deers"] },
+        { "text": "bear", "points": 30, "aliases": ["bears"] },
+        { "text": "squirrel", "points": 20, "aliases": ["squirrels"] },
+        { "text": "raccoon", "points": 15, "aliases": ["raccoons"] },
+        { "text": "fox", "points": 10, "aliases": ["foxes"] }
+      ]}
+    ]
+  },
+  {
+    "id": "blitz-002",
+    "categories": [
+      { "prompt": "Name something you bring to the beach", "answers": [
+        { "text": "towel", "points": 40, "aliases": ["towels", "beach towel"] },
+        { "text": "sunscreen", "points": 30, "aliases": ["sunblock", "spf"] },
+        { "text": "sunglasses", "points": 20, "aliases": ["shades"] },
+        { "text": "umbrella", "points": 15, "aliases": ["beach umbrella"] },
+        { "text": "cooler", "points": 10, "aliases": ["cooler bag", "drinks"] }
+      ]},
+      { "prompt": "Name something you might find in the sand", "answers": [
+        { "text": "seashell", "points": 40, "aliases": ["shells", "shell"] },
+        { "text": "crab", "points": 30, "aliases": ["crabs"] },
+        { "text": "starfish", "points": 20, "aliases": ["star fish"] },
+        { "text": "trash", "points": 15, "aliases": ["litter", "garbage"] },
+        { "text": "rock", "points": 10, "aliases": ["rocks", "pebble"] }
+      ]},
+      { "prompt": "Name a reason someone leaves the beach early", "answers": [
+        { "text": "sunburn", "points": 40, "aliases": ["got burned", "burnt"] },
+        { "text": "too hot", "points": 30, "aliases": ["heat", "overheating"] },
+        { "text": "kids tired", "points": 20, "aliases": ["kids are done", "tired kids"] },
+        { "text": "rain", "points": 15, "aliases": ["storm"] },
+        { "text": "hungry", "points": 10, "aliases": ["hunger"] }
+      ]},
+      { "prompt": "Name a beach activity", "answers": [
+        { "text": "swimming", "points": 40, "aliases": ["swim"] },
+        { "text": "building sandcastles", "points": 30, "aliases": ["sandcastles", "building a sandcastle"] },
+        { "text": "volleyball", "points": 20, "aliases": ["beach volleyball"] },
+        { "text": "tanning", "points": 15, "aliases": ["sunbathing"] },
+        { "text": "surfing", "points": 10, "aliases": ["surf"] }
+      ]},
+      { "prompt": "Name something annoying about the beach", "answers": [
+        { "text": "sand everywhere", "points": 40, "aliases": ["sand in everything", "sandy"] },
+        { "text": "sunburn", "points": 30, "aliases": ["getting burned"] },
+        { "text": "bugs", "points": 20, "aliases": ["flies", "sand fleas"] },
+        { "text": "crowds", "points": 15, "aliases": ["too crowded", "crowded"] },
+        { "text": "seaweed", "points": 10, "aliases": ["kelp"] }
+      ]}
+    ]
+  },
+  {
+    "id": "blitz-003",
+    "categories": [
+      { "prompt": "Name something people always forget on a grocery list", "answers": [
+        { "text": "milk", "points": 40, "aliases": [] },
+        { "text": "eggs", "points": 30, "aliases": ["egg"] },
+        { "text": "bread", "points": 20, "aliases": [] },
+        { "text": "butter", "points": 15, "aliases": [] },
+        { "text": "the list itself", "points": 10, "aliases": ["their list", "the list"] }
+      ]},
+      { "prompt": "Name a fruit you'd find at a grocery store", "answers": [
+        { "text": "banana", "points": 40, "aliases": ["bananas"] },
+        { "text": "apple", "points": 30, "aliases": ["apples"] },
+        { "text": "orange", "points": 20, "aliases": ["oranges"] },
+        { "text": "grapes", "points": 15, "aliases": ["grape"] },
+        { "text": "strawberry", "points": 10, "aliases": ["strawberries"] }
+      ]},
+      { "prompt": "Name something you'd find in the snack aisle", "answers": [
+        { "text": "chips", "points": 40, "aliases": ["chip", "potato chips"] },
+        { "text": "cookies", "points": 30, "aliases": ["cookie"] },
+        { "text": "candy", "points": 20, "aliases": ["sweets"] },
+        { "text": "crackers", "points": 15, "aliases": ["cracker"] },
+        { "text": "pretzels", "points": 10, "aliases": ["pretzel"] }
+      ]},
+      { "prompt": "Name a reason someone goes back into the store after checking out", "answers": [
+        { "text": "forgot an item", "points": 40, "aliases": ["forgot something"] },
+        { "text": "wrong item", "points": 30, "aliases": ["got the wrong thing"] },
+        { "text": "left something at the register", "points": 20, "aliases": ["left something behind"] },
+        { "text": "coupon", "points": 15, "aliases": ["forgot a coupon"] },
+        { "text": "receipt issue", "points": 10, "aliases": ["price was wrong", "return"] }
+      ]},
+      { "prompt": "Name something that makes grocery shopping annoying", "answers": [
+        { "text": "long lines", "points": 40, "aliases": ["long checkout lines", "checkout line"] },
+        { "text": "crowded", "points": 30, "aliases": ["too many people", "crowds"] },
+        { "text": "high prices", "points": 20, "aliases": ["expensive", "prices"] },
+        { "text": "out of stock", "points": 15, "aliases": ["sold out", "empty shelves"] },
+        { "text": "heavy bags", "points": 10, "aliases": ["carrying bags"] }
+      ]}
+    ]
+  },
+  {
+    "id": "blitz-004",
+    "categories": [
+      { "prompt": "Name a snack for movie night", "answers": [
+        { "text": "popcorn", "points": 40, "aliases": [] },
+        { "text": "candy", "points": 30, "aliases": ["sweets"] },
+        { "text": "chips", "points": 20, "aliases": [] },
+        { "text": "soda", "points": 15, "aliases": ["pop", "soft drink"] },
+        { "text": "ice cream", "points": 10, "aliases": [] }
+      ]},
+      { "prompt": "Name a reason someone pauses a movie", "answers": [
+        { "text": "bathroom break", "points": 40, "aliases": ["bathroom", "restroom"] },
+        { "text": "phone call", "points": 30, "aliases": ["phone rings", "answer the phone"] },
+        { "text": "get a snack", "points": 20, "aliases": ["grab food", "kitchen"] },
+        { "text": "confused, need to rewind", "points": 15, "aliases": ["rewind", "missed something"] },
+        { "text": "doorbell", "points": 10, "aliases": ["someone at the door"] }
+      ]},
+      { "prompt": "Name a movie genre", "answers": [
+        { "text": "comedy", "points": 40, "aliases": [] },
+        { "text": "horror", "points": 30, "aliases": ["scary movie"] },
+        { "text": "romance", "points": 20, "aliases": ["romcom", "rom-com"] },
+        { "text": "action", "points": 15, "aliases": [] },
+        { "text": "drama", "points": 10, "aliases": [] }
+      ]},
+      { "prompt": "Name something annoying during a movie", "answers": [
+        { "text": "someone talking", "points": 40, "aliases": ["talking", "people talking"] },
+        { "text": "phone light", "points": 30, "aliases": ["phone screen", "someone on their phone"] },
+        { "text": "spoilers", "points": 20, "aliases": ["spoiling it"] },
+        { "text": "loud chewing", "points": 15, "aliases": ["eating loudly"] },
+        { "text": "interruptions", "points": 10, "aliases": ["getting interrupted"] }
+      ]},
+      { "prompt": "Name something you need for the perfect movie night", "answers": [
+        { "text": "blanket", "points": 40, "aliases": ["blankets"] },
+        { "text": "snacks", "points": 30, "aliases": ["food"] },
+        { "text": "a good couch", "points": 20, "aliases": ["comfy seating", "couch"] },
+        { "text": "dim lights", "points": 15, "aliases": ["lights off", "dark room"] },
+        { "text": "good company", "points": 10, "aliases": ["someone to watch with"] }
+      ]}
+    ]
+  },
+  {
+    "id": "blitz-005",
+    "categories": [
+      { "prompt": "Name something you need on a road trip", "answers": [
+        { "text": "snacks", "points": 40, "aliases": ["food"] },
+        { "text": "music or a playlist", "points": 30, "aliases": ["music", "playlist"] },
+        { "text": "phone charger", "points": 20, "aliases": ["charger"] },
+        { "text": "gas", "points": 15, "aliases": ["fuel"] },
+        { "text": "pillow", "points": 10, "aliases": ["neck pillow"] }
+      ]},
+      { "prompt": "Name a reason to stop on a road trip", "answers": [
+        { "text": "bathroom", "points": 40, "aliases": ["restroom", "bathroom break"] },
+        { "text": "gas", "points": 30, "aliases": ["fuel", "gas station"] },
+        { "text": "food", "points": 20, "aliases": ["hungry", "eat"] },
+        { "text": "stretch legs", "points": 15, "aliases": ["stretching"] },
+        { "text": "coffee", "points": 10, "aliases": ["caffeine"] }
+      ]},
+      { "prompt": "Name something annoying on a road trip", "answers": [
+        { "text": "traffic", "points": 40, "aliases": ["a jam", "traffic jam"] },
+        { "text": "getting lost", "points": 30, "aliases": ["wrong turn", "lost"] },
+        { "text": "bad music", "points": 20, "aliases": ["arguing over music"] },
+        { "text": "car sickness", "points": 15, "aliases": ["motion sickness"] },
+        { "text": "bathroom breaks", "points": 10, "aliases": ["too many stops"] }
+      ]},
+      { "prompt": "Name a game you'd play on a long car ride", "answers": [
+        { "text": "i spy", "points": 40, "aliases": ["i-spy"] },
+        { "text": "20 questions", "points": 30, "aliases": ["twenty questions"] },
+        { "text": "license plate game", "points": 20, "aliases": ["license plates"] },
+        { "text": "trivia", "points": 15, "aliases": [] },
+        { "text": "car karaoke", "points": 10, "aliases": ["singing along", "karaoke"] }
+      ]},
+      { "prompt": "Name something you'd pack for a road trip snack", "answers": [
+        { "text": "chips", "points": 40, "aliases": [] },
+        { "text": "trail mix", "points": 30, "aliases": [] },
+        { "text": "candy", "points": 20, "aliases": [] },
+        { "text": "jerky", "points": 15, "aliases": ["beef jerky"] },
+        { "text": "fruit", "points": 10, "aliases": [] }
+      ]}
+    ]
+  },
+  {
+    "id": "blitz-006",
+    "categories": [
+      { "prompt": "Name something you need to make pasta", "answers": [
+        { "text": "noodles", "points": 40, "aliases": ["pasta"] },
+        { "text": "sauce", "points": 30, "aliases": ["tomato sauce", "marinara"] },
+        { "text": "a pot of water", "points": 20, "aliases": ["water", "pot"] },
+        { "text": "cheese", "points": 15, "aliases": ["parmesan"] },
+        { "text": "salt", "points": 10, "aliases": [] }
+      ]},
+      { "prompt": "Name a kitchen tool almost everyone has", "answers": [
+        { "text": "spatula", "points": 40, "aliases": [] },
+        { "text": "knife", "points": 30, "aliases": ["knives"] },
+        { "text": "pan", "points": 20, "aliases": ["frying pan", "skillet"] },
+        { "text": "spoon", "points": 15, "aliases": ["spoons"] },
+        { "text": "cutting board", "points": 10, "aliases": ["chopping board"] }
+      ]},
+      { "prompt": "Name something that goes wrong when cooking", "answers": [
+        { "text": "burning the food", "points": 40, "aliases": ["burnt food", "burning it"] },
+        { "text": "too salty", "points": 30, "aliases": ["over-salted"] },
+        { "text": "undercooked", "points": 20, "aliases": ["not cooked enough", "raw"] },
+        { "text": "making a mess", "points": 15, "aliases": ["spilling", "mess"] },
+        { "text": "setting off the smoke alarm", "points": 10, "aliases": ["smoke alarm", "fire alarm"] }
+      ]},
+      { "prompt": "Name a breakfast food", "answers": [
+        { "text": "eggs", "points": 40, "aliases": ["egg"] },
+        { "text": "pancakes", "points": 30, "aliases": ["pancake"] },
+        { "text": "bacon", "points": 20, "aliases": [] },
+        { "text": "cereal", "points": 15, "aliases": [] },
+        { "text": "toast", "points": 10, "aliases": [] }
+      ]},
+      { "prompt": "Name something you'd order instead of cooking", "answers": [
+        { "text": "pizza", "points": 40, "aliases": [] },
+        { "text": "chinese food", "points": 30, "aliases": ["chinese"] },
+        { "text": "tacos", "points": 20, "aliases": ["mexican food"] },
+        { "text": "burgers", "points": 15, "aliases": ["burger"] },
+        { "text": "sushi", "points": 10, "aliases": [] }
+      ]}
+    ]
+  },
+  {
+    "id": "blitz-007",
+    "categories": [
+      { "prompt": "Name something you do on a rainy day", "answers": [
+        { "text": "watch movies", "points": 40, "aliases": ["watch tv", "movies"] },
+        { "text": "nap", "points": 30, "aliases": ["sleep", "napping"] },
+        { "text": "read", "points": 20, "aliases": ["reading", "read a book"] },
+        { "text": "bake or cook", "points": 15, "aliases": ["baking", "cook"] },
+        { "text": "play games", "points": 10, "aliases": ["games", "board games"] }
+      ]},
+      { "prompt": "Name something you need when it's raining", "answers": [
+        { "text": "umbrella", "points": 40, "aliases": ["umbrellas"] },
+        { "text": "raincoat", "points": 30, "aliases": ["rain jacket"] },
+        { "text": "boots", "points": 20, "aliases": ["rain boots"] },
+        { "text": "hood", "points": 15, "aliases": ["hoodie"] },
+        { "text": "towel", "points": 10, "aliases": ["towels"] }
+      ]},
+      { "prompt": "Name a sound you hear during a storm", "answers": [
+        { "text": "thunder", "points": 40, "aliases": [] },
+        { "text": "rain on the roof", "points": 30, "aliases": ["rain hitting the roof"] },
+        { "text": "wind", "points": 20, "aliases": ["howling wind"] },
+        { "text": "lightning crack", "points": 15, "aliases": ["lightning"] },
+        { "text": "dripping", "points": 10, "aliases": ["water dripping"] }
+      ]},
+      { "prompt": "Name a reason rain ruins your day", "answers": [
+        { "text": "traffic", "points": 40, "aliases": ["worse traffic"] },
+        { "text": "canceled plans", "points": 30, "aliases": ["plans get canceled"] },
+        { "text": "wet clothes", "points": 20, "aliases": ["getting soaked", "getting wet"] },
+        { "text": "power outage", "points": 15, "aliases": ["losing power"] },
+        { "text": "flooding", "points": 10, "aliases": ["flooded roads"] }
+      ]},
+      { "prompt": "Name a cozy drink for a rainy day", "answers": [
+        { "text": "hot chocolate", "points": 40, "aliases": ["cocoa", "hot cocoa"] },
+        { "text": "coffee", "points": 30, "aliases": [] },
+        { "text": "tea", "points": 20, "aliases": [] },
+        { "text": "hot cider", "points": 15, "aliases": ["apple cider"] },
+        { "text": "warm milk", "points": 10, "aliases": [] }
+      ]}
+    ]
+  },
+  {
+    "id": "blitz-008",
+    "categories": [
+      { "prompt": "Name something you'd do on a date night at home", "answers": [
+        { "text": "cook dinner together", "points": 40, "aliases": ["cook dinner", "cooking"] },
+        { "text": "watch a movie", "points": 30, "aliases": ["movie night"] },
+        { "text": "play games", "points": 20, "aliases": ["board games", "games"] },
+        { "text": "order takeout", "points": 15, "aliases": ["takeout", "order food"] },
+        { "text": "light candles", "points": 10, "aliases": ["candles"] }
+      ]},
+      { "prompt": "Name a classic date idea", "answers": [
+        { "text": "dinner and a movie", "points": 40, "aliases": ["dinner and movie"] },
+        { "text": "picnic", "points": 30, "aliases": [] },
+        { "text": "walk together", "points": 20, "aliases": ["a walk", "walking"] },
+        { "text": "bowling", "points": 15, "aliases": [] },
+        { "text": "mini golf", "points": 10, "aliases": ["minigolf"] }
+      ]},
+      { "prompt": "Name something that could go wrong on a first date", "answers": [
+        { "text": "awkward silence", "points": 40, "aliases": ["awkward silences"] },
+        { "text": "running late", "points": 30, "aliases": ["being late"] },
+        { "text": "bad restaurant choice", "points": 20, "aliases": ["bad restaurant"] },
+        { "text": "nervousness", "points": 15, "aliases": ["being nervous"] },
+        { "text": "spilling food or a drink", "points": 10, "aliases": ["spilling something"] }
+      ]},
+      { "prompt": "Name a romantic gesture", "answers": [
+        { "text": "flowers", "points": 40, "aliases": [] },
+        { "text": "a love note", "points": 30, "aliases": ["love note", "note"] },
+        { "text": "a surprise gift", "points": 20, "aliases": ["surprise gift", "gift"] },
+        { "text": "cooking dinner", "points": 15, "aliases": [] },
+        { "text": "holding hands", "points": 10, "aliases": [] }
+      ]},
+      { "prompt": "Name a good date night dessert", "answers": [
+        { "text": "chocolate", "points": 40, "aliases": [] },
+        { "text": "ice cream", "points": 30, "aliases": [] },
+        { "text": "cake", "points": 20, "aliases": [] },
+        { "text": "cookies", "points": 15, "aliases": ["cookie"] },
+        { "text": "strawberries", "points": 10, "aliases": ["chocolate covered strawberries"] }
+      ]}
+    ]
+  },
+  {
+    "id": "blitz-009",
+    "categories": [
+      { "prompt": "Name a popular pet", "answers": [
+        { "text": "dog", "points": 40, "aliases": ["dogs"] },
+        { "text": "cat", "points": 30, "aliases": ["cats"] },
+        { "text": "fish", "points": 20, "aliases": [] },
+        { "text": "bird", "points": 15, "aliases": ["birds"] },
+        { "text": "hamster", "points": 10, "aliases": ["hamsters"] }
+      ]},
+      { "prompt": "Name something a dog does that's annoying", "answers": [
+        { "text": "barking", "points": 40, "aliases": ["bark"] },
+        { "text": "chewing things", "points": 30, "aliases": ["chewing"] },
+        { "text": "digging", "points": 20, "aliases": [] },
+        { "text": "shedding", "points": 15, "aliases": [] },
+        { "text": "jumping on you", "points": 10, "aliases": ["jumping up"] }
+      ]},
+      { "prompt": "Name something you need to take care of a pet", "answers": [
+        { "text": "food", "points": 40, "aliases": [] },
+        { "text": "water", "points": 30, "aliases": [] },
+        { "text": "vet visits", "points": 20, "aliases": ["the vet"] },
+        { "text": "toys", "points": 15, "aliases": ["toy"] },
+        { "text": "love and attention", "points": 10, "aliases": ["attention", "love"] }
+      ]},
+      { "prompt": "Name a place a cat likes to sleep", "answers": [
+        { "text": "the bed", "points": 40, "aliases": ["bed"] },
+        { "text": "the couch", "points": 30, "aliases": ["couch", "sofa"] },
+        { "text": "a sunny window spot", "points": 20, "aliases": ["windowsill", "sunny spot"] },
+        { "text": "a box", "points": 15, "aliases": ["box"] },
+        { "text": "your lap", "points": 10, "aliases": ["lap"] }
+      ]},
+      { "prompt": "Name something pets do that makes you laugh", "answers": [
+        { "text": "chase their tail", "points": 40, "aliases": ["chasing their tail"] },
+        { "text": "get the zoomies", "points": 30, "aliases": ["zoomies"] },
+        { "text": "make weird noises", "points": 20, "aliases": ["weird sounds"] },
+        { "text": "make silly faces", "points": 15, "aliases": ["silly faces"] },
+        { "text": "get scared of nothing", "points": 10, "aliases": ["scared of nothing"] }
+      ]}
+    ]
+  },
+  {
+    "id": "blitz-010",
+    "categories": [
+      { "prompt": "Name a holiday tradition", "answers": [
+        { "text": "decorating", "points": 40, "aliases": ["decorations"] },
+        { "text": "gift giving", "points": 30, "aliases": ["giving gifts", "presents"] },
+        { "text": "a big meal", "points": 20, "aliases": ["big dinner", "family meal"] },
+        { "text": "family gathering", "points": 15, "aliases": ["seeing family"] },
+        { "text": "holiday movies", "points": 10, "aliases": ["movies"] }
+      ]},
+      { "prompt": "Name something stressful about the holidays", "answers": [
+        { "text": "shopping", "points": 40, "aliases": ["gift shopping"] },
+        { "text": "family drama", "points": 30, "aliases": ["family issues", "drama"] },
+        { "text": "travel", "points": 20, "aliases": ["traveling"] },
+        { "text": "money or budget", "points": 15, "aliases": ["money", "budget"] },
+        { "text": "cooking", "points": 10, "aliases": ["hosting"] }
+      ]},
+      { "prompt": "Name a holiday food", "answers": [
+        { "text": "turkey", "points": 40, "aliases": [] },
+        { "text": "ham", "points": 30, "aliases": [] },
+        { "text": "cookies", "points": 20, "aliases": ["cookie"] },
+        { "text": "pie", "points": 15, "aliases": [] },
+        { "text": "mashed potatoes", "points": 10, "aliases": ["potatoes"] }
+      ]},
+      { "prompt": "Name something you do to get ready for the holidays", "answers": [
+        { "text": "decorate", "points": 40, "aliases": ["decorating"] },
+        { "text": "shop for gifts", "points": 30, "aliases": ["gift shopping"] },
+        { "text": "clean the house", "points": 20, "aliases": ["cleaning"] },
+        { "text": "plan the meal", "points": 15, "aliases": ["meal planning"] },
+        { "text": "send cards", "points": 10, "aliases": ["holiday cards"] }
+      ]},
+      { "prompt": "Name a reason someone might skip a big holiday gathering", "answers": [
+        { "text": "work", "points": 40, "aliases": ["working"] },
+        { "text": "traveling too far", "points": 30, "aliases": ["too far to travel", "distance"] },
+        { "text": "sick", "points": 20, "aliases": ["illness"] },
+        { "text": "family drama", "points": 15, "aliases": ["drama"] },
+        { "text": "too tired", "points": 10, "aliases": ["exhausted"] }
+      ]}
+    ]
+  },
+  {
+    "id": "blitz-011",
+    "categories": [
+      { "prompt": "Name something people do to work out", "answers": [
+        { "text": "run", "points": 40, "aliases": ["running", "jog"] },
+        { "text": "lift weights", "points": 30, "aliases": ["weightlifting", "lifting"] },
+        { "text": "yoga", "points": 20, "aliases": [] },
+        { "text": "bike", "points": 15, "aliases": ["cycling", "biking"] },
+        { "text": "swim", "points": 10, "aliases": ["swimming"] }
+      ]},
+      { "prompt": "Name a reason someone skips the gym", "answers": [
+        { "text": "too tired", "points": 40, "aliases": ["exhausted"] },
+        { "text": "no time", "points": 30, "aliases": ["too busy"] },
+        { "text": "sore", "points": 20, "aliases": ["sore muscles"] },
+        { "text": "bad weather", "points": 15, "aliases": [] },
+        { "text": "lazy", "points": 10, "aliases": ["not motivated"] }
+      ]},
+      { "prompt": "Name something you need for a workout", "answers": [
+        { "text": "water bottle", "points": 40, "aliases": ["water"] },
+        { "text": "good shoes", "points": 30, "aliases": ["sneakers", "shoes"] },
+        { "text": "gym clothes", "points": 20, "aliases": ["workout clothes"] },
+        { "text": "a towel", "points": 15, "aliases": ["towel"] },
+        { "text": "music or headphones", "points": 10, "aliases": ["headphones", "music"] }
+      ]},
+      { "prompt": "Name a body part people love to work out", "answers": [
+        { "text": "abs", "points": 40, "aliases": ["core", "stomach"] },
+        { "text": "arms", "points": 30, "aliases": ["biceps"] },
+        { "text": "legs", "points": 20, "aliases": [] },
+        { "text": "back", "points": 15, "aliases": [] },
+        { "text": "chest", "points": 10, "aliases": [] }
+      ]},
+      { "prompt": "Name something that motivates people to exercise", "answers": [
+        { "text": "looking good", "points": 40, "aliases": ["appearance"] },
+        { "text": "health", "points": 30, "aliases": ["being healthy"] },
+        { "text": "stress relief", "points": 20, "aliases": ["stress"] },
+        { "text": "energy", "points": 15, "aliases": ["more energy"] },
+        { "text": "a goal or event", "points": 10, "aliases": ["a goal", "an event"] }
+      ]}
+    ]
+  },
+  {
+    "id": "blitz-012",
+    "categories": [
+      { "prompt": "Name something couples argue about", "answers": [
+        { "text": "money", "points": 40, "aliases": ["finances"] },
+        { "text": "chores", "points": 30, "aliases": ["housework"] },
+        { "text": "who's right", "points": 20, "aliases": ["being right"] },
+        { "text": "plans", "points": 15, "aliases": ["making plans"] },
+        { "text": "being late", "points": 10, "aliases": ["lateness"] }
+      ]},
+      { "prompt": "Name a way to show love", "answers": [
+        { "text": "compliments", "points": 40, "aliases": ["words of affirmation"] },
+        { "text": "gifts", "points": 30, "aliases": ["giving gifts"] },
+        { "text": "hugs or affection", "points": 20, "aliases": ["hugs", "affection"] },
+        { "text": "quality time", "points": 15, "aliases": ["spending time together"] },
+        { "text": "helping out", "points": 10, "aliases": ["acts of service", "helping"] }
+      ]},
+      { "prompt": "Name something couples do on a lazy Sunday", "answers": [
+        { "text": "sleep in", "points": 40, "aliases": ["sleeping in"] },
+        { "text": "watch tv", "points": 30, "aliases": ["watch shows", "netflix"] },
+        { "text": "cook together", "points": 20, "aliases": ["cooking"] },
+        { "text": "cuddle", "points": 15, "aliases": ["cuddling"] },
+        { "text": "run errands", "points": 10, "aliases": ["errands"] }
+      ]},
+      { "prompt": "Name a nickname couples might call each other", "answers": [
+        { "text": "babe", "points": 40, "aliases": ["baby"] },
+        { "text": "honey", "points": 30, "aliases": [] },
+        { "text": "love", "points": 20, "aliases": ["my love"] },
+        { "text": "sweetheart", "points": 15, "aliases": ["sweetie"] },
+        { "text": "bear", "points": 10, "aliases": ["bear-y"] }
+      ]},
+      { "prompt": "Name something that makes a relationship strong", "answers": [
+        { "text": "trust", "points": 40, "aliases": [] },
+        { "text": "communication", "points": 30, "aliases": ["talking things out"] },
+        { "text": "laughter", "points": 20, "aliases": ["having fun", "humor"] },
+        { "text": "support", "points": 15, "aliases": ["supporting each other"] },
+        { "text": "honesty", "points": 10, "aliases": [] }
+      ]}
+    ]
+  }
+]

@@ -52,8 +52,15 @@ function showPairingForm() {
   if (waitTimer) clearInterval(waitTimer);
 }
 
+function checkInstallMode() {
+  const isStandalone =
+    window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+  el('installNotice').classList.toggle('hidden', isStandalone);
+}
+
 function initPairing(opts) {
   onPaired = opts.onPaired || onPaired;
+  checkInstallMode();
 
   document.querySelectorAll('.pairing-tab').forEach((btn) => {
     btn.addEventListener('click', () => switchPairingTab(btn.dataset.pairing));

@@ -1,5 +1,6 @@
 import { apiPost } from './api.js';
 import { getIdentity } from './state.js';
+import { toast } from './toast.js';
 
 let onSubmitted = () => {};
 
@@ -15,7 +16,8 @@ async function pickOption(choice) {
   const identity = getIdentity();
   try {
     await apiPost('/api/guess/submit', { code: identity.code, memberId: identity.memberId, choice });
-    onSubmitted();
+    toast('✓ Locked in 💞');
+    onSubmitted('guess');
   } catch (err) {
     alert(err.message);
   }
@@ -29,8 +31,8 @@ function renderGuess(guess, score) {
 
   el('guessRoleBanner').textContent =
     guess.myRole === 'answerer'
-      ? "Today, pick what's actually true for you."
-      : 'Today, guess what your partner will pick.';
+      ? "Today it's your turn to answer honestly."
+      : "Today, guess what they'll pick.";
 
   el('guessPromptText').textContent = guess.prompt;
 

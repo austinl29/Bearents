@@ -1,7 +1,8 @@
 const { requireMember } = require('../lib/couples');
 const { getRedis } = require('../lib/redis');
 const { getAppDate } = require('../lib/day');
-const { todaysQaQuestion, todaysGuessRound, todaysDare } = require('../lib/scheduler');
+const { todaysQaQuestion, todaysGuessRound, todaysDare, todaysDoodlePrompt } = require('../lib/scheduler');
+const { todaysBearBlitzRound } = require('../lib/bearBlitz');
 
 // The one bundle endpoint the app calls on load and after every submit.
 // Server-side reveal-gating lives here: partner's QA answer and guess-mode
@@ -94,6 +95,59 @@ module.exports = async (req, res) => {
 
   const streaks = (await redis.hgetall(`couple:${couple.code}:streaks`)) || {};
 
+  const myTrifectaComplete = Boolean(myQaText) && Boolean(guess.iHaveSubmitted) && dare.myDone;
+
+  // ---- Bear Blitz (bonus) ----
+  // The ranked answer bank / point values never leave the server — only
+  // category prompts pre-submit, and only the already-scored result once
+  // this member has submitted their own 5 answers.
+  const bbRound = await todaysBearBlitzRound(couple.code, couple.createdAt);
+  const bbAnswers = (await redis.hgetall(`couple:${couple.code}:bearblitz:answers:${appDate}`)) || {};
+  const myBBSubmitted = bbAnswers[`${meKey}Total`] !== undefined;
+  const partnerBBSubmitted = bbAnswers[`${partnerKey}Total`] !== undefined;
+  const bbBothSubmitted = myBBSubmitted && partnerBBSubmitted;
+  const bearBlitz = {
+    id: bbRound.id,
+    prompts: bbRound.categories.map((c) => c.prompt),
+    mySubmitted: myBBSubmitted,
+    partnerSubmitted: partnerBBSubmitted,
+    bothSubmitted: bbBothSubmitted,
+    myAnswers: myBBSubmitted ? JSON.parse(bbAnswers[`${meKey}Answers`] || '[]') : null,
+    myTotal: myBBSubmitted ? parseInt(bbAnswers[`${meKey}Total`] || '0', 10) : null,
+    partnerAnswers: bbBothSubmitted ? JSON.parse(bbAnswers[`${partnerKey}Answers`] || '[]') : null,
+    partnerTotal: bbBothSubmitted ? parseInt(bbAnswers[`${partnerKey}Total`] || '0', 10) : null,
+    topAnswers: bbBothSubmitted ? bbRound.categories.map((c) => c.answers[0].text) : null,
+  };
+
+  // ---- Doodle Guess (bonus) ----
+  // The guesser never receives the prompt text before they've submitted a
+  // guess — only the finished strokes, otherwise there'd be nothing to
+  // guess. The artist always knows the prompt (they drew it) and can see
+  // the guess as soon as it exists, to rate it.
+  const doodleRound = await todaysDoodlePrompt(couple.code, couple.createdAt);
+  const doodleAnswers = (await redis.hgetall(`couple:${couple.code}:doodle:answers:${appDate}`)) || {};
+  const myDoodleRole = doodleRound.artistSlot === slot ? 'artist' : 'guesser';
+  const hasDrawing = Boolean(doodleAnswers.strokes);
+  const hasGuess = Boolean(doodleAnswers.guessText);
+  const hasRating = doodleAnswers.artistRating !== undefined;
+  const doodle = {
+    id: doodleRound.id,
+    myRole: myDoodleRole,
+    prompt: myDoodleRole === 'artist' ? doodleRound.text : hasGuess ? doodleRound.text : null,
+    strokes: hasDrawing ? JSON.parse(doodleAnswers.strokes) : null,
+    hasDrawing,
+    hasGuess,
+    guessText: hasGuess ? doodleAnswers.guessText : null,
+    hasRating,
+    artistRating: hasRating ? doodleAnswers.artistRating === 'true' : null,
+  };
+
+  const doodleScoreHash = (await redis.hgetall(`couple:${couple.code}:doodle:score`)) || {};
+  const doodleScore = {
+    goodGuesses: parseInt(doodleScoreHash.goodGuesses || '0', 10),
+    totalGuesses: parseInt(doodleScoreHash.totalGuesses || '0', 10),
+  };
+
   res.status(200).json({
     paired: true,
     code: couple.code,
@@ -104,6 +158,10 @@ module.exports = async (req, res) => {
     guess,
     guessScore,
     dare,
+    myTrifectaComplete,
+    bearBlitz,
+    doodle,
+    doodleScore,
     streaks: {
       qaCurrent: parseInt(streaks.qa_current || '0', 10),
       qaLongest: parseInt(streaks.qa_longest || '0', 10),

@@ -6,14 +6,25 @@ import { initGuess, renderGuess } from './guess.js';
 import { initDare, renderDare } from './dare.js';
 import { initSettings, showSettings } from './settings.js';
 import { registerServiceWorker } from './push.js';
+import { loadStory } from './story.js';
+import { initBearBlitz, renderBlitz } from './bearblitz.js';
+import { initDoodle, renderDoodle } from './doodle.js';
 
 const screens = {
   pairing: document.getElementById('screen-pairing'),
   games: document.getElementById('screen-games'),
+  story: document.getElementById('screen-story'),
+  bearblitz: document.getElementById('screen-bearblitz'),
+  doodle: document.getElementById('screen-doodle'),
   settings: document.getElementById('screen-settings'),
 };
 
+const CORE_ORDER = ['qa', 'guess', 'dare'];
+
 let pollTimer = null;
+let lastState = null;
+let hasEnteredGames = false;
+let celebrated = false;
 
 function el(id) {
   return document.getElementById(id);
@@ -28,6 +39,35 @@ function renderStreaks(streaks) {
     <div class="streak-chip">🔥 Q&amp;A streak: <strong>${streaks.qaCurrent}</strong></div>
     <div class="streak-chip">🎯 Dare streak: <strong>${streaks.dareCurrent}</strong></div>
   `;
+}
+
+function isCoreDone(state, key) {
+  if (key === 'qa') return Boolean(state.qa.myAnswer);
+  if (key === 'guess') return state.guess.iHaveSubmitted;
+  if (key === 'dare') return state.dare.myDone;
+  return false;
+}
+
+function nextIncompleteTab(state) {
+  return CORE_ORDER.find((key) => !isCoreDone(state, key));
+}
+
+function switchTab(tabKey) {
+  document.querySelectorAll('.tab').forEach((b) => b.classList.toggle('active', b.dataset.tab === tabKey));
+  document.querySelectorAll('.game-panel').forEach((p) => p.classList.toggle('active', p.id === `panel-${tabKey}`));
+}
+
+function renderBonusSubs(state) {
+  el('bonusBlitzSub').textContent = state.bearBlitz.bothSubmitted
+    ? state.bearBlitz.myTotal >= state.bearBlitz.partnerTotal
+      ? "You're ahead today ⚡"
+      : "They're ahead today ⚡"
+    : state.bearBlitz.mySubmitted
+      ? 'Waiting on your partner…'
+      : '5 quick questions, see who scores higher';
+  el('bonusDoodleSub').textContent = state.doodle.hasRating
+    ? "Today's round is done — see the reveal"
+    : 'One of you draws, the other guesses';
 }
 
 async function refreshState() {
@@ -45,14 +85,41 @@ async function refreshState() {
       showWaiting(identity.code);
       return;
     }
-    showScreen('games');
+    lastState = state;
+    // Only auto-navigate on the pairing -> games transition — every other
+    // screen change from here on is driven by an explicit user tap, never
+    // by the background poll (otherwise a mid-doodle drawing or the
+    // settings screen would get yanked away every 8 seconds).
+    if (!hasEnteredGames) {
+      showScreen('games');
+      hasEnteredGames = true;
+    }
     renderStreaks(state.streaks);
     renderQa(state.qa);
     renderGuess(state.guess, state.guessScore);
     renderDare(state.dare);
+    renderBonusSubs(state);
+    renderBlitz(state.bearBlitz, state.partnerName);
+    renderDoodle(state.doodle, state.myName, state.partnerName);
   } catch (err) {
     console.error(err);
   }
+}
+
+async function handleCoreSubmitted(gameKey) {
+  await refreshState();
+  if (!lastState) return;
+
+  if (lastState.myTrifectaComplete) {
+    if (!celebrated) {
+      celebrated = true;
+      el('celebrateOverlay').classList.remove('hidden');
+    }
+    return;
+  }
+
+  const next = nextIncompleteTab(lastState);
+  if (next) switchTab(next);
 }
 
 function startPolling() {
@@ -62,12 +129,7 @@ function startPolling() {
 
 function setupTabs() {
   document.querySelectorAll('.tab').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.tab').forEach((b) => b.classList.toggle('active', b === btn));
-      document
-        .querySelectorAll('.game-panel')
-        .forEach((p) => p.classList.toggle('active', p.id === `panel-${btn.dataset.tab}`));
-    });
+    btn.addEventListener('click', () => switchTab(btn.dataset.tab));
   });
 }
 
@@ -78,7 +140,37 @@ function setupSettingsNav() {
   });
   el('backToGamesBtn').addEventListener('click', () => {
     showScreen('games');
-    refreshState();
+  });
+}
+
+function setupBonusNav() {
+  el('bonusStoryCard').addEventListener('click', () => {
+    showScreen('story');
+    loadStory();
+  });
+  el('bonusBlitzCard').addEventListener('click', () => showScreen('bearblitz'));
+  el('bonusDoodleCard').addEventListener('click', () => showScreen('doodle'));
+
+  el('storyBackBtn').addEventListener('click', () => showScreen('games'));
+  el('blitzBackBtn').addEventListener('click', () => showScreen('games'));
+  el('doodleBackBtn').addEventListener('click', () => showScreen('games'));
+}
+
+function setupCelebration() {
+  const close = () => el('celebrateOverlay').classList.add('hidden');
+  el('celebrateCloseBtn').addEventListener('click', close);
+  el('celebrateBlitzBtn').addEventListener('click', () => {
+    close();
+    showScreen('bearblitz');
+  });
+  el('celebrateDoodleBtn').addEventListener('click', () => {
+    close();
+    showScreen('doodle');
+  });
+  el('celebrateStoryBtn').addEventListener('click', () => {
+    close();
+    showScreen('story');
+    loadStory();
   });
 }
 
@@ -89,12 +181,16 @@ async function boot() {
       startPolling();
     },
   });
-  initQa({ onSubmitted: refreshState });
-  initGuess({ onSubmitted: refreshState });
-  initDare({ onSubmitted: refreshState });
+  initQa({ onSubmitted: handleCoreSubmitted });
+  initGuess({ onSubmitted: handleCoreSubmitted });
+  initDare({ onSubmitted: handleCoreSubmitted });
+  initBearBlitz({ onSubmitted: refreshState });
+  initDoodle({ onSubmitted: refreshState });
   initSettings();
   setupTabs();
   setupSettingsNav();
+  setupBonusNav();
+  setupCelebration();
   registerServiceWorker();
 
   await refreshState();

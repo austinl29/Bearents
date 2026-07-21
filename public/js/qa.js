@@ -1,5 +1,6 @@
 import { apiPost } from './api.js';
 import { getIdentity } from './state.js';
+import { toast } from './toast.js';
 
 let onSubmitted = () => {};
 
@@ -16,7 +17,8 @@ function initQa(opts) {
     el('qaSubmitBtn').disabled = true;
     try {
       await apiPost('/api/qa/answer', { code: identity.code, memberId: identity.memberId, text });
-      onSubmitted();
+      toast('✓ Answer locked in 💛');
+      onSubmitted('qa');
     } catch (err) {
       alert(err.message);
     } finally {

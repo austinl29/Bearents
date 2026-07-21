@@ -397,3 +397,219 @@ button { font-family: inherit; }
   max-width: 60%;
 }
 .settings-divider { height: 1px; background: var(--line); margin: 10px 0; }
+
+/* ---------- Install notice ---------- */
+.install-notice {
+  background: rgba(232, 135, 125, 0.14);
+  color: var(--rose);
+  font-size: 12.5px;
+  font-weight: 700;
+  line-height: 1.5;
+  padding: 12px 14px;
+  border-radius: 14px;
+  margin-bottom: 16px;
+}
+
+/* ---------- Panel titles (shared across Compatibility/Dare/Bonus) ---------- */
+.panel-title {
+  font-family: 'Baloo 2', 'Nunito', sans-serif;
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--ink);
+}
+
+/* ---------- Toasts ---------- */
+.toast-container {
+  position: fixed;
+  left: 50%;
+  bottom: 100px;
+  transform: translateX(-50%);
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  pointer-events: none;
+  width: 100%;
+  padding: 0 20px;
+}
+.toast {
+  background: var(--ink);
+  color: var(--cream);
+  font-size: 13px;
+  font-weight: 700;
+  padding: 11px 20px;
+  border-radius: 999px;
+  box-shadow: var(--shadow);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  max-width: 100%;
+  text-align: center;
+}
+.toast.show { opacity: 1; transform: translateY(0); }
+
+/* ---------- Bonus hub ---------- */
+.bonus-intro { color: var(--muted); font-size: 13px; margin: -4px 0 2px; }
+.bonus-cards { display: flex; flex-direction: column; gap: 12px; }
+.bonus-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 16px;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  color: var(--ink);
+}
+.bonus-card:active { transform: scale(0.98); }
+.bonus-card-icon { font-size: 26px; flex-shrink: 0; }
+.bonus-card-body { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0; }
+.bonus-card-title { font-weight: 800; font-size: 15.5px; }
+.bonus-card-sub { font-size: 12px; color: var(--muted); }
+.bonus-card-arrow { font-size: 22px; color: var(--muted); flex-shrink: 0; }
+
+/* ---------- Sub-screens (Our Story / Bear Blitz / Doodle Guess) ---------- */
+.subscreen-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 0 16px;
+}
+.subscreen-header h2 { margin: 0; font-size: 20px; }
+
+/* Our Story */
+.story-feed { display: flex; flex-direction: column; gap: 14px; padding-bottom: 20px; }
+.story-empty { color: var(--muted); font-size: 13.5px; text-align: center; padding: 40px 20px; line-height: 1.6; }
+.story-day {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 16px 18px;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.story-date {
+  font-family: 'Baloo 2', 'Nunito', sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: var(--honey-dark);
+  text-transform: uppercase;
+}
+.story-block { font-size: 13.5px; line-height: 1.5; }
+.story-block b { color: var(--ink); }
+.story-block .story-q { font-weight: 700; margin-bottom: 4px; }
+.story-block .story-a { color: var(--muted); }
+.story-divider { height: 1px; background: var(--line); }
+
+/* ---------- Bear Blitz ---------- */
+.blitz-intro { color: var(--muted); font-size: 13px; margin: 0 0 6px; }
+.blitz-form { display: flex; flex-direction: column; gap: 14px; }
+.blitz-question { display: flex; flex-direction: column; gap: 8px; }
+.blitz-category { font-weight: 700; font-size: 15px; }
+.blitz-input {
+  border: 1.5px solid var(--line);
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-size: 14.5px;
+  background: var(--card);
+  color: var(--ink);
+  font-family: inherit;
+}
+.blitz-waiting {
+  text-align: center;
+  color: var(--muted);
+  font-size: 13.5px;
+  padding: 30px 20px;
+  line-height: 1.6;
+}
+.blitz-reveal { display: flex; flex-direction: column; gap: 12px; }
+.blitz-total-row {
+  display: flex;
+  justify-content: space-between;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: var(--shadow);
+}
+.blitz-total { text-align: center; flex: 1; }
+.blitz-total .name { font-size: 12px; color: var(--muted); font-weight: 700; text-transform: uppercase; }
+.blitz-total .score { font-family: 'Baloo 2', monospace; font-size: 28px; font-weight: 800; color: var(--honey-dark); }
+.blitz-winner {
+  text-align: center;
+  font-weight: 800;
+  font-size: 15px;
+  color: var(--sage);
+}
+.blitz-answer-row {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 12px 14px;
+  font-size: 13px;
+}
+.blitz-answer-row .cat { font-weight: 700; margin-bottom: 4px; }
+.blitz-answer-row .pair { display: flex; justify-content: space-between; color: var(--muted); }
+
+/* ---------- Doodle Guess ---------- */
+.doodle-prompt-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 14px 16px;
+  font-weight: 700;
+  font-size: 16px;
+  box-shadow: var(--shadow);
+  margin-bottom: 12px;
+}
+.doodle-canvas-wrap {
+  background: var(--card);
+  border: 1.5px solid var(--line);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  touch-action: none;
+}
+.doodle-canvas-wrap canvas { display: block; width: 100%; touch-action: none; }
+.doodle-toolbar { display: flex; gap: 10px; margin-top: 12px; }
+.doodle-toolbar .btn { flex: 1; }
+.doodle-waiting { text-align: center; color: var(--muted); font-size: 13.5px; padding: 30px 20px; line-height: 1.6; }
+.doodle-guess-form { display: flex; flex-direction: column; gap: 10px; margin-top: 14px; }
+.doodle-rate-row { display: flex; gap: 10px; margin-top: 14px; }
+.doodle-rate-row .btn { flex: 1; }
+
+/* ---------- Celebration overlay ---------- */
+.celebrate-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(36, 26, 19, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  z-index: 60;
+}
+.celebrate-card {
+  background: var(--card);
+  border-radius: 24px;
+  padding: 28px 24px;
+  max-width: 380px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 24px 60px -20px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  animation: popIn 0.3s ease;
+}
+.celebrate-emoji { font-size: 46px; }
+.celebrate-card h2 { margin: 0; font-size: 22px; }
+.celebrate-card p { color: var(--muted); font-size: 13.5px; margin: 0 0 8px; line-height: 1.5; }

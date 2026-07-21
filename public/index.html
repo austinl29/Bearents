@@ -30,6 +30,11 @@
       <p>A little daily thing just for the two of you.</p>
     </div>
 
+    <div id="installNotice" class="install-notice hidden">
+      📲 Install this to your home screen first — Share → Add to Home Screen — then open it from the home
+      screen icon. Otherwise your login won't stick between visits.
+    </div>
+
     <div id="pairingMainCard" class="pairing-card">
       <div class="pairing-tabs">
         <button class="pairing-tab active" data-pairing="create" type="button">Start one</button>
@@ -86,6 +91,7 @@
       </div>
 
       <div id="panel-guess" class="game-panel">
+        <div class="panel-title">💞 Compatibility</div>
         <div class="guess-score" id="guessScoreBar"></div>
         <div class="guess-role-banner" id="guessRoleBanner"></div>
         <p class="guess-prompt" id="guessPromptText">Loading today's round…</p>
@@ -94,6 +100,7 @@
       </div>
 
       <div id="panel-dare" class="game-panel">
+        <div class="panel-title">🔥 Dare</div>
         <div class="dare-card">
           <div class="dare-emoji">🔥</div>
           <p class="dare-text" id="dareText">Loading today's dare…</p>
@@ -101,13 +108,69 @@
           <div class="dare-status" id="dareStatus"></div>
         </div>
       </div>
+
+      <div id="panel-bonus" class="game-panel">
+        <div class="panel-title">🎁 Bonus</div>
+        <p class="bonus-intro">Play whenever you want — no waiting on the daily 3.</p>
+        <div class="bonus-cards">
+          <button class="bonus-card" id="bonusStoryCard" type="button">
+            <span class="bonus-card-icon">📖</span>
+            <span class="bonus-card-body">
+              <span class="bonus-card-title">Our Story</span>
+              <span class="bonus-card-sub" id="bonusStorySub">Look back at your answers together</span>
+            </span>
+            <span class="bonus-card-arrow">›</span>
+          </button>
+          <button class="bonus-card" id="bonusBlitzCard" type="button">
+            <span class="bonus-card-icon">⚡</span>
+            <span class="bonus-card-body">
+              <span class="bonus-card-title">Bear Blitz</span>
+              <span class="bonus-card-sub" id="bonusBlitzSub">5 quick questions, see who scores higher</span>
+            </span>
+            <span class="bonus-card-arrow">›</span>
+          </button>
+          <button class="bonus-card" id="bonusDoodleCard" type="button">
+            <span class="bonus-card-icon">🎨</span>
+            <span class="bonus-card-body">
+              <span class="bonus-card-title">Doodle Guess</span>
+              <span class="bonus-card-sub" id="bonusDoodleSub">One of you draws, the other guesses</span>
+            </span>
+            <span class="bonus-card-arrow">›</span>
+          </button>
+        </div>
+      </div>
     </div>
 
     <nav class="tabbar">
       <button class="tab active" data-tab="qa" type="button"><span class="tab-icon">💬</span><span>Q&amp;A</span></button>
-      <button class="tab" data-tab="guess" type="button"><span class="tab-icon">🎯</span><span>Guess</span></button>
+      <button class="tab" data-tab="guess" type="button"><span class="tab-icon">💞</span><span>Match</span></button>
       <button class="tab" data-tab="dare" type="button"><span class="tab-icon">🔥</span><span>Dare</span></button>
+      <button class="tab" data-tab="bonus" type="button"><span class="tab-icon">🎁</span><span>Bonus</span></button>
     </nav>
+  </section>
+
+  <section id="screen-story" class="screen">
+    <div class="subscreen-header">
+      <button class="icon-btn" id="storyBackBtn" type="button" aria-label="Back">←</button>
+      <h2>📖 Our Story</h2>
+    </div>
+    <div id="storyFeed" class="story-feed"></div>
+  </section>
+
+  <section id="screen-bearblitz" class="screen">
+    <div class="subscreen-header">
+      <button class="icon-btn" id="blitzBackBtn" type="button" aria-label="Back">←</button>
+      <h2>⚡ Bear Blitz</h2>
+    </div>
+    <div id="blitzBody"></div>
+  </section>
+
+  <section id="screen-doodle" class="screen">
+    <div class="subscreen-header">
+      <button class="icon-btn" id="doodleBackBtn" type="button" aria-label="Back">←</button>
+      <h2>🎨 Doodle Guess</h2>
+    </div>
+    <div id="doodleBody"></div>
   </section>
 
   <section id="screen-settings" class="screen">
@@ -132,6 +195,18 @@
       <button id="backToGamesBtn" class="btn btn-ghost btn-block" type="button">Back to games</button>
     </div>
   </section>
+
+  <div id="celebrateOverlay" class="celebrate-overlay hidden">
+    <div class="celebrate-card">
+      <div class="celebrate-emoji">🎉</div>
+      <h2>You're all set for today!</h2>
+      <p>Q&amp;A, Compatibility, and Dare — done. Want to keep the fun going?</p>
+      <button class="btn btn-primary btn-block" id="celebrateBlitzBtn" type="button">⚡ Play Bear Blitz</button>
+      <button class="btn btn-secondary btn-block" id="celebrateDoodleBtn" type="button">🎨 Play Doodle Guess</button>
+      <button class="btn btn-secondary btn-block" id="celebrateStoryBtn" type="button">📖 Look back at Our Story</button>
+      <button class="btn btn-ghost btn-block" id="celebrateCloseBtn" type="button">Maybe later</button>
+    </div>
+  </div>
 </div>
 
 <script type="module" src="js/app.js"></script>
