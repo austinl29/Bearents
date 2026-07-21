@@ -28,7 +28,7 @@ function pollWaiting(code) {
   if (waitTimer) clearInterval(waitTimer);
   waitTimer = setInterval(async () => {
     try {
-      const status = await apiGet('/api/couple/status', { code });
+      const status = await apiGet('/api/couple', { code });
       if (status.paired) {
         clearInterval(waitTimer);
         onPaired();
@@ -70,7 +70,7 @@ function initPairing(opts) {
     setError('');
     el('createBtn').disabled = true;
     try {
-      const result = await apiPost('/api/couple/create', { displayName: el('createName').value });
+      const result = await apiPost('/api/couple', { action: 'create', displayName: el('createName').value });
       setIdentity(result);
       showWaiting(result.code);
     } catch (err) {
@@ -85,7 +85,7 @@ function initPairing(opts) {
     el('joinBtn').disabled = true;
     try {
       const code = el('joinCode').value.trim().toUpperCase();
-      const result = await apiPost('/api/couple/join', { code, displayName: el('joinName').value });
+      const result = await apiPost('/api/couple', { action: 'join', code, displayName: el('joinName').value });
       setIdentity(result);
       onPaired();
     } catch (err) {

@@ -84,7 +84,7 @@ async function submitDrawing() {
   }
   const identity = getIdentity();
   try {
-    await apiPost('/api/doodle/submit-drawing', { code: identity.code, memberId: identity.memberId, strokes });
+    await apiPost('/api/doodle', { code: identity.code, memberId: identity.memberId, action: 'draw', strokes });
     toast('🎨 Drawing sent!');
     strokes = [];
     onSubmitted('doodle');
@@ -96,7 +96,7 @@ async function submitDrawing() {
 async function submitGuess(text) {
   const identity = getIdentity();
   try {
-    await apiPost('/api/doodle/submit-guess', { code: identity.code, memberId: identity.memberId, guessText: text });
+    await apiPost('/api/doodle', { code: identity.code, memberId: identity.memberId, action: 'guess', guessText: text });
     toast('🎨 Guess locked in!');
     onSubmitted('doodle');
   } catch (err) {
@@ -107,7 +107,7 @@ async function submitGuess(text) {
 async function rateGuess(wasGood) {
   const identity = getIdentity();
   try {
-    await apiPost('/api/doodle/rate', { code: identity.code, memberId: identity.memberId, wasGood });
+    await apiPost('/api/doodle', { code: identity.code, memberId: identity.memberId, action: 'rate', wasGood });
     onSubmitted('doodle');
   } catch (err) {
     alert(err.message);

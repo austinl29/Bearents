@@ -23,7 +23,7 @@ function initSettings() {
     const memberId = el('relinkMemberId').value.trim();
     if (!code || !memberId) return;
     try {
-      const result = await apiPost('/api/couple/relink', { code, memberId });
+      const result = await apiPost('/api/couple', { action: 'relink', code, memberId });
       setIdentity(result);
       window.location.reload();
     } catch (err) {
