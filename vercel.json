@@ -4,5 +4,13 @@
       "path": "/api/cron/daily-nudge",
       "schedule": "0 13 * * *"
     }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-cache, must-revalidate" }
+      ]
+    }
   ]
 }
