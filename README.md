@@ -58,22 +58,19 @@ people writing data. Easiest path:
 
 ### 2. Push keys
 
-Generate your own VAPID key pair (don't reuse the bulk-pickup-app ones):
+A VAPID key pair has already been generated for you and the **public** half
+is already wired into `public/js/push.js` — nothing to do there. The
+**private** half was only ever shown once in chat, never committed to this
+repo (VAPID_PRIVATE_KEY is a secret — treat it like a password). In Vercel →
+**Settings → Environment Variables**, add:
 
-```
-npx web-push generate-vapid-keys
-```
-
-Then:
-
-- Paste the **public key** into `public/js/push.js`, replacing
-  `REPLACE_WITH_YOUR_VAPID_PUBLIC_KEY`.
-- In Vercel → **Settings → Environment Variables**, add:
-  - `VAPID_PUBLIC_KEY` = (public key)
-  - `VAPID_PRIVATE_KEY` = (private key)
-  - `VAPID_SUBJECT` = `mailto:austeeny29@gmail.com`
-  - `CRON_SECRET` = any random string you make up (stops randoms from
-    hitting the nudge endpoint)
+- `VAPID_PUBLIC_KEY` = `BLGGse5b55Ac7YJ6pYuVN3zzj-Jx8pDtlXSB4yuPpJHIYakdjO2T8yWCI1KHU69PG36hRzk1MZhJgGtTeewLd8Q`
+- `VAPID_PRIVATE_KEY` = (the private key from chat — re-generate a fresh pair
+  with `npx web-push generate-vapid-keys` if you no longer have it, and
+  update the public key in `public/js/push.js` to match)
+- `VAPID_SUBJECT` = `mailto:austeeny29@gmail.com`
+- `CRON_SECRET` = any random string you make up (stops randoms from
+  hitting the nudge endpoint)
 
 ### 3. Deploy to Vercel
 

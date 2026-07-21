@@ -2,7 +2,7 @@ import { getIdentity } from './state.js';
 
 // Public VAPID key — safe to ship in client code. Replace after generating
 // your own keys with `npx web-push generate-vapid-keys` (see README).
-const VAPID_PUBLIC_KEY = 'REPLACE_WITH_YOUR_VAPID_PUBLIC_KEY';
+const VAPID_PUBLIC_KEY = 'BLGGse5b55Ac7YJ6pYuVN3zzj-Jx8pDtlXSB4yuPpJHIYakdjO2T8yWCI1KHU69PG36hRzk1MZhJgGtTeewLd8Q';
 
 function urlBase64ToUint8Array(base64String) {
   const padding = '='.repeat((4 - (base64String.length % 4)) % 4);
