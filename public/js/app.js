@@ -25,6 +25,7 @@ let pollTimer = null;
 let lastState = null;
 let hasEnteredGames = false;
 let celebrated = false;
+let requestSeq = 0;
 
 function el(id) {
   return document.getElementById(id);
@@ -78,42 +79,55 @@ async function refreshState() {
     return null;
   }
 
+  // The background poll (every 8s) and a submit-triggered refresh can both
+  // be in flight at once. Network responses don't always arrive in the same
+  // order they were sent — an older poll issued before a submit can resolve
+  // *after* the submit's own fresher refresh, and without this guard its
+  // stale render would silently overwrite the correct one on screen. Only
+  // the response to the most-recently-issued request is ever applied.
+  const myRequestId = ++requestSeq;
+  let state;
   try {
-    const state = await apiGet('/api/state', { code: identity.code, memberId: identity.memberId });
-    if (!state.paired) {
-      showScreen('pairing');
-      showWaiting(identity.code);
-      return null;
-    }
-    lastState = state;
-    // Only auto-navigate on the pairing -> games transition — every other
-    // screen change from here on is driven by an explicit user tap, never
-    // by the background poll (otherwise a mid-doodle drawing or the
-    // settings screen would get yanked away every 8 seconds).
-    if (!hasEnteredGames) {
-      showScreen('games');
-      hasEnteredGames = true;
-    }
-    renderStreaks(state.streaks);
-    renderQa(state.qa);
-    renderGuess(state.guess, state.guessScore);
-    renderDare(state.dare);
-    renderBonusSubs(state);
-    renderBlitz(state.bearBlitz, state.partnerName);
-    renderDoodle(state.doodle, state.myName, state.partnerName);
-    return state;
+    state = await apiGet('/api/state', { code: identity.code, memberId: identity.memberId });
   } catch (err) {
     console.error(err);
     return null;
   }
+
+  if (myRequestId !== requestSeq) {
+    return null; // superseded by a newer request — its own response is authoritative instead
+  }
+
+  if (!state.paired) {
+    showScreen('pairing');
+    showWaiting(identity.code);
+    return null;
+  }
+
+  lastState = state;
+  // Only auto-navigate on the pairing -> games transition — every other
+  // screen change from here on is driven by an explicit user tap, never
+  // by the background poll (otherwise a mid-doodle drawing or the
+  // settings screen would get yanked away every 8 seconds).
+  if (!hasEnteredGames) {
+    showScreen('games');
+    hasEnteredGames = true;
+  }
+  renderStreaks(state.streaks);
+  renderQa(state.qa);
+  renderGuess(state.guess, state.guessScore);
+  renderDare(state.dare);
+  renderBonusSubs(state);
+  renderBlitz(state.bearBlitz, state.partnerName);
+  renderDoodle(state.doodle, state.myName, state.partnerName);
+  return state;
 }
 
 async function handleCoreSubmitted(gameKey) {
-  // Use the state this call just fetched, not the shared `lastState` — the
-  // background poll (every 8s) also writes `lastState`, and if it lands
-  // right around a submit, it can overwrite the fresh "all done" state with
-  // a stale one before this function gets to check it.
-  const state = await refreshState();
+  // Prefer the state this call just fetched; if it got superseded by an
+  // even newer request, fall back to `lastState`, which the sequencing
+  // guard above guarantees was set by whichever request is actually latest.
+  const state = (await refreshState()) || lastState;
   if (!state) return;
 
   if (state.myTrifectaComplete) {
