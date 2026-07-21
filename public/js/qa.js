@@ -3,6 +3,7 @@ import { getIdentity } from './state.js';
 import { toast } from './toast.js';
 
 let onSubmitted = () => {};
+let lastRenderedQaId = null;
 
 function el(id) {
   return document.getElementById(id);
@@ -46,9 +47,13 @@ function renderQa(qa) {
       el('qaPartnerText').textContent = "Waiting for them to answer…";
       partnerCard.classList.add('waiting');
     }
-  } else {
+  } else if (qa.id !== lastRenderedQaId) {
+    // Only clear the compose box when the question itself actually changed
+    // (a new day) — the background poll calls this every 8s, and clearing
+    // on every poll was wiping out whatever you were mid-typing.
     el('qaInput').value = '';
   }
+  lastRenderedQaId = qa.id;
 }
 
 export { initQa, renderQa };

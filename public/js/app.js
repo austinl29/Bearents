@@ -75,7 +75,7 @@ async function refreshState() {
   if (!identity) {
     showScreen('pairing');
     showPairingForm();
-    return;
+    return null;
   }
 
   try {
@@ -83,7 +83,7 @@ async function refreshState() {
     if (!state.paired) {
       showScreen('pairing');
       showWaiting(identity.code);
-      return;
+      return null;
     }
     lastState = state;
     // Only auto-navigate on the pairing -> games transition — every other
@@ -101,16 +101,22 @@ async function refreshState() {
     renderBonusSubs(state);
     renderBlitz(state.bearBlitz, state.partnerName);
     renderDoodle(state.doodle, state.myName, state.partnerName);
+    return state;
   } catch (err) {
     console.error(err);
+    return null;
   }
 }
 
 async function handleCoreSubmitted(gameKey) {
-  await refreshState();
-  if (!lastState) return;
+  // Use the state this call just fetched, not the shared `lastState` — the
+  // background poll (every 8s) also writes `lastState`, and if it lands
+  // right around a submit, it can overwrite the fresh "all done" state with
+  // a stale one before this function gets to check it.
+  const state = await refreshState();
+  if (!state) return;
 
-  if (lastState.myTrifectaComplete) {
+  if (state.myTrifectaComplete) {
     if (!celebrated) {
       celebrated = true;
       el('celebrateOverlay').classList.remove('hidden');
@@ -118,7 +124,7 @@ async function handleCoreSubmitted(gameKey) {
     return;
   }
 
-  const next = nextIncompleteTab(lastState);
+  const next = nextIncompleteTab(state);
   if (next) switchTab(next);
 }
 

@@ -109,6 +109,7 @@ module.exports = async (req, res) => {
   const bearBlitz = {
     id: bbRound.id,
     prompts: bbRound.categories.map((c) => c.prompt),
+    maxPossible: bbRound.categories.reduce((sum, c) => sum + c.answers[0].points, 0),
     mySubmitted: myBBSubmitted,
     partnerSubmitted: partnerBBSubmitted,
     bothSubmitted: bbBothSubmitted,

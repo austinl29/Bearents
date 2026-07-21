@@ -30,12 +30,17 @@ async function submitBlitz(answers) {
   }
 }
 
-function renderComposeForm(prompts) {
+function maxScoreHeader(maxPossible) {
+  return `<div class="blitz-max-score">🎯 Top possible score: <strong>${maxPossible}</strong></div>`;
+}
+
+function renderComposeForm(blitz) {
   const body = el('blitzBody');
   body.innerHTML = `
+    ${maxScoreHeader(blitz.maxPossible)}
     <p class="blitz-intro">5 quick questions — answer with whatever comes to mind first. Higher score wins today.</p>
     <div class="blitz-form" id="blitzForm">
-      ${prompts
+      ${blitz.prompts
         .map(
           (p, i) => `
         <div class="blitz-question">
@@ -59,9 +64,28 @@ function renderComposeForm(prompts) {
   });
 }
 
-function renderWaiting() {
-  el('blitzBody').innerHTML =
-    '<div class="blitz-waiting">✓ You\'re locked in! Waiting for your partner to play their round…</div>';
+// My own score is never gated on my partner — only the head-to-head
+// win/lose comparison waits for both of us.
+function renderMyResultWaiting(blitz) {
+  const rows = blitz.prompts
+    .map((prompt, i) => {
+      const mine = blitz.myAnswers[i] || { text: '', points: 0 };
+      return `
+      <div class="blitz-answer-row">
+        <div class="cat">${i + 1}. ${escapeHtml(prompt)}</div>
+        <div class="pair"><span>You: ${escapeHtml(mine.text || '—')}${mine.points ? ` (+${mine.points})` : ' (+0)'}</span></div>
+      </div>`;
+    })
+    .join('');
+
+  el('blitzBody').innerHTML = `
+    ${maxScoreHeader(blitz.maxPossible)}
+    <div class="blitz-total-row">
+      <div class="blitz-total"><div class="name">Your score</div><div class="score">${blitz.myTotal}</div></div>
+    </div>
+    <div class="blitz-waiting">✓ Locked in! Waiting for your partner's answers to see who wins today…</div>
+    ${rows}
+  `;
 }
 
 function renderReveal(blitz, partnerName) {
@@ -74,8 +98,8 @@ function renderReveal(blitz, partnerName) {
       <div class="blitz-answer-row">
         <div class="cat">${i + 1}. ${escapeHtml(prompt)}<br><span style="color:var(--muted);font-weight:400;">Top answer: ${escapeHtml(top)}</span></div>
         <div class="pair">
-          <span>You: ${escapeHtml(mine.text || '—')}${mine.points ? ` (+${mine.points})` : ''}</span>
-          <span>${escapeHtml(partnerName)}: ${escapeHtml(theirs.text || '—')}${theirs.points ? ` (+${theirs.points})` : ''}</span>
+          <span>You: ${escapeHtml(mine.text || '—')}${mine.points ? ` (+${mine.points})` : ' (+0)'}</span>
+          <span>${escapeHtml(partnerName)}: ${escapeHtml(theirs.text || '—')}${theirs.points ? ` (+${theirs.points})` : ' (+0)'}</span>
         </div>
       </div>`;
     })
@@ -89,6 +113,7 @@ function renderReveal(blitz, partnerName) {
         : `🏆 ${escapeHtml(partnerName)} wins today!`;
 
   el('blitzBody').innerHTML = `
+    ${maxScoreHeader(blitz.maxPossible)}
     <div class="blitz-reveal">
       <div class="blitz-total-row">
         <div class="blitz-total"><div class="name">You</div><div class="score">${blitz.myTotal}</div></div>
@@ -108,9 +133,9 @@ function renderBlitz(blitz, partnerName) {
   if (blitz.bothSubmitted) {
     renderReveal(blitz, partnerName);
   } else if (blitz.mySubmitted) {
-    renderWaiting();
+    renderMyResultWaiting(blitz);
   } else {
-    renderComposeForm(blitz.prompts);
+    renderComposeForm(blitz);
   }
 }
 

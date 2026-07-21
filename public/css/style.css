@@ -237,7 +237,7 @@ button { font-family: inherit; }
   padding: 14px;
   font-family: inherit;
   font-size: 15px;
-  min-height: 110px;
+  min-height: 200px;
   resize: vertical;
   background: var(--card);
   color: var(--ink);
@@ -510,6 +510,15 @@ button { font-family: inherit; }
 .story-divider { height: 1px; background: var(--line); }
 
 /* ---------- Bear Blitz ---------- */
+.blitz-max-score {
+  background: rgba(246, 169, 59, 0.14);
+  color: var(--honey-dark);
+  font-weight: 700;
+  font-size: 13px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
 .blitz-intro { color: var(--muted); font-size: 13px; margin: 0 0 6px; }
 .blitz-form { display: flex; flex-direction: column; gap: 14px; }
 .blitz-question { display: flex; flex-direction: column; gap: 8px; }
