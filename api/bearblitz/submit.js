@@ -1,7 +1,7 @@
 const { requireMember } = require('../../lib/couples');
 const { getRedis } = require('../../lib/redis');
 const { getAppDate } = require('../../lib/day');
-const { todaysBearBlitzRound, scoreAnswer } = require('../../lib/bearBlitz');
+const { todaysBearBlitzRound, scoreAnswer, scoreAnswersWithAI } = require('../../lib/bearBlitz');
 
 module.exports = async (req, res) => {
   if (req.method !== 'POST') return res.status(405).json({ error: 'POST only' });
@@ -30,12 +30,17 @@ module.exports = async (req, res) => {
   }
 
   const round = await todaysBearBlitzRound(couple.code, couple.createdAt);
+  const texts = answers.map((a) => String(a || '').trim().slice(0, 200));
 
-  const scored = round.categories.map((cat, i) => {
-    const text = String(answers[i] || '').trim().slice(0, 200);
-    const { points, matched } = scoreAnswer(text, cat.answers);
-    return { text, matched, points };
-  });
+  // AI-judged scoring understands "watch their show" means the same thing as
+  // "watch tv" — the exact-match/alias approach can't. If the API call fails
+  // or no key is configured, scoreAnswer() keeps the game playable.
+  const scored =
+    (await scoreAnswersWithAI(round.categories, texts)) ||
+    round.categories.map((cat, i) => {
+      const { points, matched } = scoreAnswer(texts[i], cat.answers);
+      return { text: texts[i], matched, points };
+    });
   const total = scored.reduce((sum, s) => sum + s.points, 0);
 
   await redis.hset(key, {

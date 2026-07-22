@@ -11,6 +11,10 @@ screens as a PWA. Three modes:
   tracked automatically.
 - **Dare** — a small daily challenge for the two of you (share a memory, send
   a compliment, etc.), with a streak counter.
+- **Bear Blitz** (bonus) — a 5-question speed round. Each answer is scored by
+  Claude against a ranked answer list, so differently-worded-but-equivalent
+  answers ("watch their show" vs. "watch tv") still score correctly — not
+  just exact string matches.
 
 Both partners' answers sync automatically through a shared cloud database —
 no manual copy-pasting required, unlike the push-subscription trick in the
@@ -72,18 +76,30 @@ repo (VAPID_PRIVATE_KEY is a secret — treat it like a password). In Vercel →
 - `CRON_SECRET` = any random string you make up (stops randoms from
   hitting the nudge endpoint)
 
-### 3. Deploy to Vercel
+### 3. Anthropic API key (for Bear Blitz scoring)
+
+Bear Blitz answers are scored by Claude rather than exact string matching. In
+Vercel → **Settings → Environment Variables**, add:
+
+- `ANTHROPIC_API_KEY` = an API key from
+  [console.anthropic.com](https://console.anthropic.com) (Settings → API
+  Keys). Costs are negligible — five short answers, once a day, per couple.
+- If this isn't set (or the API call ever fails), Bear Blitz automatically
+  falls back to simple exact/alias matching so the game still works — just
+  less forgivingly.
+
+### 4. Deploy to Vercel
 
 You don't need Node installed locally — Vercel builds in the cloud, same as
 bulk-pickup-app.
 
 1. Push this folder to a new GitHub repo.
 2. Vercel → **Add New Project** → import that repo.
-3. Make sure the env vars from steps 1–2 are set (Redis vars should already
+3. Make sure the env vars from steps 1–3 are set (Redis vars should already
    be there if you used the Marketplace path).
 4. Deploy.
 
-### 4. Install + pair on both phones
+### 5. Install + pair on both phones
 
 1. Open your deployed URL in Safari (iPhone) or Chrome (Android) on **your**
    phone. Tap Share/menu → **Add to Home Screen**. Open it from the home
@@ -101,7 +117,7 @@ bulk-pickup-app.
    your member ID somewhere safe — you'll need them to relink if you ever
    reinstall the app or clear site data.
 
-### 5. Test the daily nudge without waiting for the cron
+### 6. Test the daily nudge without waiting for the cron
 
 ```
 curl -H "Authorization: Bearer <your CRON_SECRET>" https://<your-app>.vercel.app/api/cron/daily-nudge
