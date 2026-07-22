@@ -150,9 +150,9 @@ module.exports = async (req, res) => {
     totalGuesses: parseInt(doodleScoreHash.totalGuesses || '0', 10),
   };
 
-  // ---- Personal welcome letter (one-time, joiner only) ----
+  // ---- Personal welcome letter (one-time per member) ----
   const seenWelcomeField = meKey === 'member1' ? 'member1SeenWelcome' : 'member2SeenWelcome';
-  const showWelcomeLetter = slot === 2 && couple[seenWelcomeField] !== 'true';
+  const showWelcomeLetter = couple[seenWelcomeField] !== 'true';
 
   // ---- Anniversary / birthday takeover ----
   const specialDay = getSpecialDay(appDate);
