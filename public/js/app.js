@@ -1,5 +1,5 @@
 import { getIdentity } from './state.js';
-import { apiGet } from './api.js';
+import { apiGet, apiPost } from './api.js';
 import { initPairing, showPairingForm, showWaiting } from './pairing.js';
 import { initQa, renderQa } from './qa.js';
 import { initGuess, renderGuess } from './guess.js';
@@ -9,9 +9,11 @@ import { registerServiceWorker } from './push.js';
 import { loadStory } from './story.js';
 import { initBearBlitz, renderBlitz } from './bearblitz.js';
 import { initDoodle, renderDoodle } from './doodle.js';
+import { initSpecialContent, playWelcomeBurst, shouldShowSpecialDay, showSpecialDay } from './specialContent.js';
 
 const screens = {
   pairing: document.getElementById('screen-pairing'),
+  welcome: document.getElementById('screen-welcome'),
   games: document.getElementById('screen-games'),
   story: document.getElementById('screen-story'),
   bearblitz: document.getElementById('screen-bearblitz'),
@@ -24,6 +26,7 @@ const CORE_ORDER = ['qa', 'guess', 'dare'];
 let pollTimer = null;
 let lastState = null;
 let hasEnteredGames = false;
+let welcomePending = false;
 let celebrated = false;
 let requestSeq = 0;
 
@@ -110,9 +113,20 @@ async function refreshState() {
   // by the background poll (otherwise a mid-doodle drawing or the
   // settings screen would get yanked away every 8 seconds).
   if (!hasEnteredGames) {
+    if (state.showWelcomeLetter && !welcomePending) {
+      // One-time personal welcome for whoever joined the couple — blocks
+      // the normal games screen until they tap through it.
+      welcomePending = true;
+      showScreen('welcome');
+      playWelcomeBurst();
+      return state;
+    }
+    if (welcomePending) return state; // still waiting on their tap, nothing else to render yet
+
     showScreen('games');
     hasEnteredGames = true;
   }
+
   renderStreaks(state.streaks);
   renderQa(state.qa);
   renderGuess(state.guess, state.guessScore);
@@ -120,7 +134,21 @@ async function refreshState() {
   renderBonusSubs(state);
   renderBlitz(state.bearBlitz, state.partnerName);
   renderDoodle(state.doodle, state.myName, state.partnerName);
+
+  if (hasEnteredGames && shouldShowSpecialDay(state.specialDay, state.appDate)) {
+    showSpecialDay(state.specialDay, state.specialDayStats, state.appDate);
+  }
+
   return state;
+}
+
+async function handleWelcomeContinue() {
+  const identity = getIdentity();
+  await apiPost('/api/couple', { action: 'markWelcomeSeen', code: identity.code, memberId: identity.memberId });
+  welcomePending = false;
+  showScreen('games');
+  hasEnteredGames = true;
+  await refreshState();
 }
 
 async function handleCoreSubmitted(gameKey) {
@@ -206,6 +234,7 @@ async function boot() {
   initDare({ onSubmitted: handleCoreSubmitted });
   initBearBlitz({ onSubmitted: refreshState });
   initDoodle({ onSubmitted: refreshState });
+  initSpecialContent({ onWelcomeContinue: handleWelcomeContinue });
   initSettings();
   setupTabs();
   setupSettingsNav();

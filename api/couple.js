@@ -1,4 +1,4 @@
-const { createCouple, joinCouple, relinkCouple } = require('../lib/couples');
+const { createCouple, joinCouple, relinkCouple, markWelcomeSeen } = require('../lib/couples');
 const { getRedis } = require('../lib/redis');
 
 // Merged create/join/relink/status into one function — Vercel's Hobby plan
@@ -48,6 +48,12 @@ module.exports = async (req, res) => {
       const { code, memberId } = req.body || {};
       if (!code || !memberId) return res.status(400).json({ error: 'code and memberId are required' });
       const result = await relinkCouple(String(code).toUpperCase().trim(), String(memberId));
+      return res.status(200).json(result);
+    }
+    if (action === 'markWelcomeSeen') {
+      const { code, memberId } = req.body || {};
+      if (!code || !memberId) return res.status(400).json({ error: 'code and memberId are required' });
+      const result = await markWelcomeSeen(String(code).toUpperCase().trim(), String(memberId));
       return res.status(200).json(result);
     }
     return res.status(400).json({ error: 'Unknown action' });

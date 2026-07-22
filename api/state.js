@@ -3,6 +3,7 @@ const { getRedis, parseJsonField } = require('../lib/redis');
 const { getAppDate } = require('../lib/day');
 const { todaysQaQuestion, todaysGuessRound, todaysDare, todaysDoodlePrompt } = require('../lib/scheduler');
 const { todaysBearBlitzRound } = require('../lib/bearBlitz');
+const { getSpecialDay, daysTogether } = require('../lib/specialDays');
 
 // The one bundle endpoint the app calls on load and after every submit.
 // Server-side reveal-gating lives here: partner's QA answer and guess-mode
@@ -149,6 +150,23 @@ module.exports = async (req, res) => {
     totalGuesses: parseInt(doodleScoreHash.totalGuesses || '0', 10),
   };
 
+  // ---- Personal welcome letter (one-time, joiner only) ----
+  const seenWelcomeField = meKey === 'member1' ? 'member1SeenWelcome' : 'member2SeenWelcome';
+  const showWelcomeLetter = slot === 2 && couple[seenWelcomeField] !== 'true';
+
+  // ---- Anniversary / birthday takeover ----
+  const specialDay = getSpecialDay(appDate);
+  let specialDayStats = null;
+  if (specialDay) {
+    const lifetime = (await redis.hgetall(`couple:${couple.code}:lifetime`)) || {};
+    specialDayStats = {
+      daysTogether: daysTogether(appDate),
+      qaCount: parseInt(lifetime.qaCount || '0', 10),
+      dareCount: parseInt(lifetime.dareCount || '0', 10),
+      streak: parseInt(streaks.qa_current || '0', 10),
+    };
+  }
+
   res.status(200).json({
     paired: true,
     code: couple.code,
@@ -163,6 +181,9 @@ module.exports = async (req, res) => {
     bearBlitz,
     doodle,
     doodleScore,
+    showWelcomeLetter,
+    specialDay,
+    specialDayStats,
     streaks: {
       qaCurrent: parseInt(streaks.qa_current || '0', 10),
       qaLongest: parseInt(streaks.qa_longest || '0', 10),

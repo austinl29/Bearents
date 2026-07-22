@@ -612,6 +612,8 @@ button { font-family: inherit; }
   padding: 28px 24px;
   max-width: 380px;
   width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
   text-align: center;
   box-shadow: 0 24px 60px -20px rgba(0, 0, 0, 0.5);
   display: flex;
@@ -622,3 +624,110 @@ button { font-family: inherit; }
 .celebrate-emoji { font-size: 46px; }
 .celebrate-card h2 { margin: 0; font-size: 22px; }
 .celebrate-card p { color: var(--muted); font-size: 13.5px; margin: 0 0 8px; line-height: 1.5; }
+
+/* ---------- Welcome letter + special-day shared pieces ---------- */
+.heart-watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 420px;
+  height: 420px;
+  transform: translate(-50%, -50%);
+  opacity: 0.08;
+  pointer-events: none;
+  z-index: 0;
+}
+.heart-watermark svg { width: 100%; height: 100%; fill: var(--rose); }
+
+.heart-burst { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 1; }
+.floaty {
+  position: absolute;
+  bottom: -40px;
+  font-size: 22px;
+  opacity: 0;
+  animation: floatUp 3.2s ease-in forwards;
+}
+@keyframes floatUp {
+  0% { opacity: 0; transform: translateY(0) scale(0.6) rotate(0deg); }
+  12% { opacity: 1; }
+  80% { opacity: 0.85; }
+  100% { opacity: 0; transform: translateY(-520px) scale(1.05) rotate(14deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .floaty { animation: none; opacity: 0; }
+}
+
+.welcome-screen {
+  position: relative;
+  justify-content: center;
+  background: radial-gradient(circle at 50% 0%, rgba(246, 169, 59, 0.16), transparent 60%);
+}
+.welcome-emoji { font-size: 40px; margin-bottom: 6px; position: relative; z-index: 2; }
+.letter-card {
+  position: relative;
+  z-index: 2;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 26px;
+  padding: 26px 22px 24px;
+  box-shadow: 0 26px 60px -24px rgba(64, 42, 31, 0.45);
+  margin-top: 14px;
+  text-align: left;
+}
+.letter-greeting { font-size: 21px; font-weight: 800; margin: 0 0 12px; }
+.letter-body p { font-size: 14.5px; line-height: 1.65; color: var(--ink); margin: 0 0 13px; }
+.letter-sign { font-size: 15px; font-weight: 800; font-style: italic; color: var(--honey-dark); margin-top: 2px; }
+.welcome-cta {
+  position: relative;
+  z-index: 2;
+  margin-top: 22px;
+  border: none;
+  font-family: inherit;
+  font-weight: 800;
+  font-size: 15px;
+  color: #fff;
+  padding: 15px 30px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--honey), var(--honey-dark));
+  box-shadow: 0 14px 28px -12px rgba(217, 134, 15, 0.7);
+  cursor: pointer;
+}
+
+.special-day-card { position: relative; text-align: center; }
+.event-date {
+  position: relative;
+  z-index: 2;
+  display: inline-block;
+  align-self: center;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--honey-dark);
+  background: rgba(246, 169, 59, 0.14);
+  padding: 6px 13px;
+  border-radius: 999px;
+  margin-bottom: 12px;
+}
+.event-emoji { position: relative; z-index: 2; font-size: 44px; margin-bottom: 2px; }
+.event-title { position: relative; z-index: 2; font-size: 24px; font-weight: 800; margin: 2px 0 4px; text-wrap: balance; }
+.special-day-card .letter-card { margin-top: 12px; }
+
+.stat-row {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  width: 100%;
+  margin-top: 16px;
+}
+.stat-card {
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 13px 8px;
+}
+.stat-num { font-size: 21px; font-weight: 800; color: var(--honey-dark); font-variant-numeric: tabular-nums; }
+.stat-label { font-size: 10.5px; color: var(--muted); font-weight: 700; margin-top: 2px; }
+.placeholder-flag { position: relative; z-index: 2; font-size: 10.5px; color: var(--muted); font-style: italic; margin: 4px 0 4px; }

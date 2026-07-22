@@ -65,6 +65,24 @@
     </div>
   </section>
 
+  <section id="screen-welcome" class="screen welcome-screen">
+    <div class="heart-watermark"><svg viewBox="0 0 32 29.6" xmlns="http://www.w3.org/2000/svg"><path d="M23.6 0c-3.4 0-6.3 2-7.6 4.9C14.7 2 11.8 0 8.4 0 3.8 0 0 3.8 0 8.4c0 9.4 9.5 14.2 16 21.2 6.5-7 16-11.8 16-21.2C32 3.8 28.2 0 23.6 0z"/></svg></div>
+    <div class="heart-burst" id="burst-welcome"></div>
+    <div class="welcome-emoji">🐻💛</div>
+    <div class="letter-card">
+      <div class="letter-greeting">Hey Emma,</div>
+      <div class="letter-body">
+        <p>So this is Bearents — our own little corner of the internet where I get to bug you every day with questions, dares, and increasingly unhinged guessing games. Consider this your official welcome (and your official warning).</p>
+        <p>Fair notice: I built you an app instead of writing you a normal card, because you deserve someone who goes above and beyond for you, my love.</p>
+        <p>Every day there'll be something small waiting for you here — nothing that requires effort, just a reason to smile and think of me for thirty seconds in the middle of your day. Answer honestly, guess wildly, and take the dares seriously (I will know if you don't).</p>
+        <p>Also, quick PSA: Bear is raccoon and he's the best, idc what you say he's my son now..</p>
+        <p>Okay. Go tap the button. I made this for you.</p>
+        <div class="letter-sign">— Austin 🐻🤍</div>
+      </div>
+    </div>
+    <button class="welcome-cta" id="welcomeContinueBtn" type="button">Tap the button 💛</button>
+  </section>
+
   <section id="screen-games" class="screen">
     <div class="streak-bar" id="streakBar"></div>
 
@@ -195,6 +213,23 @@
       <button id="backToGamesBtn" class="btn btn-ghost btn-block" type="button">Back to games</button>
     </div>
   </section>
+
+  <div id="specialDayOverlay" class="celebrate-overlay hidden">
+    <div class="celebrate-card special-day-card">
+      <div class="heart-watermark"><svg viewBox="0 0 32 29.6" xmlns="http://www.w3.org/2000/svg"><path d="M23.6 0c-3.4 0-6.3 2-7.6 4.9C14.7 2 11.8 0 8.4 0 3.8 0 0 3.8 0 8.4c0 9.4 9.5 14.2 16 21.2 6.5-7 16-11.8 16-21.2C32 3.8 28.2 0 23.6 0z"/></svg></div>
+      <div class="heart-burst" id="burst-specialDay"></div>
+      <div class="event-date" id="specialDayDate"></div>
+      <div class="event-emoji" id="specialDayEmoji"></div>
+      <div class="event-title" id="specialDayTitle"></div>
+      <div class="letter-card">
+        <div class="letter-greeting" id="specialDayGreeting"></div>
+        <div class="letter-body" id="specialDayBody"></div>
+      </div>
+      <div class="stat-row hidden" id="specialDayStats"></div>
+      <div class="placeholder-flag hidden" id="specialDayStatsNote">↑ these numbers grow as you two keep playing</div>
+      <button class="btn btn-primary btn-block" id="specialDayCloseBtn" type="button">Back to us 💛</button>
+    </div>
+  </div>
 
   <div id="celebrateOverlay" class="celebrate-overlay hidden">
     <div class="celebrate-card">
